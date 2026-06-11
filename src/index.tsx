@@ -10,7 +10,7 @@ import "./styles.css";
 
 //const DEBUG = import.meta.env.DEV;
 //const DEBUG = false;
-const DEBUG = true;
+//const DEBUG = true;
 
 const CodeExample: VoidComponent<{ ExampleComponent: VoidComponent; code: string }> = (props) => (
   <>
@@ -31,37 +31,12 @@ const Section: ParentComponent<{ title: string; slug: string }> = (props) => (
   </>
 );
 
-const EXAMPLES: { ExampleComponent: VoidComponent; title: string; slug: string }[] = DEBUG
-  ? [
 
-      //------------------------------------
-      /*
-      {
-        title: "DEBUG example",
-        slug: "debug",
-        ExampleComponent: () => (
-          <CodeExample
-            ExampleComponent={() => (
-              <PanelGroup>
-                <Panel id="1">Panel 1</Panel>
-                <ResizeHandle />
-                <Panel id="2">Panel 2</Panel>
-                <ResizeHandle />
-                <Panel id="3">Panel 3</Panel>
-              </PanelGroup>
-            )}
-            code={String.raw`<PanelGroup>
-<Panel id="1">Panel 1</Panel>
-<ResizeHandle />
-<Panel id="2">Panel 2</Panel>
-<ResizeHandle />
-<Panel id="3">Panel 3</Panel>
-</PanelGroup>`}
-          />
-        ),
-      },
-      */
-      //------------------------------------
+
+//const EXAMPLES: { ExampleComponent: VoidComponent; title: string; slug: string }[] = DEBUG()
+const EXAMPLES: { ExampleComponent: VoidComponent; title: string; slug: string }[] = 
+[
+   [
       {
         title: "DEBUG example",
         slug: "debug",
@@ -110,7 +85,8 @@ const EXAMPLES: { ExampleComponent: VoidComponent; title: string; slug: string }
       },
       //------------------------------------
     ]
-  : [
+    ,
+    [
       {
         title: "Basic example",
         slug: "basic",
@@ -316,6 +292,7 @@ const EXAMPLES: { ExampleComponent: VoidComponent; title: string; slug: string }
                 </div>
               );
             }}
+	    
             code={String.raw`const [api, setAPI] = createSignal<PanelGroupAPI>();
 
 const [isPanelCollapsed, setPanelCollapsed] = createSignal(false);
@@ -357,15 +334,31 @@ return (
           />
         ),
       },
+    ]
     ];
+
+  const [DEBUG, SETDEBUG] = createSignal(true);
+  const [index, setIndex] = createSignal(0);
+  const changemode = () => {
+       if (DEBUG()) {
+          SETDEBUG(false);
+	  setIndex(1);
+	  console.log("DEBUG", DEBUG());
+       } else {
+          SETDEBUG(true);
+	  setIndex(0);
+	  console.log("DEBUG", DEBUG());
+       }
+  };
 
 const App = () => (
   <main>
     <h1>solid-resizable-panels</h1>
     <p>GUSA A set of components for Solid.JS to make resizable layouts.</p>
+    <button onClick={changemode}>{DEBUG() ? "DEBUG" : "Exsamples"} </button>
     <h2>Contents</h2>
     <ol>
-      <For each={EXAMPLES}>
+      <For each={EXAMPLES[index()]}>
         {(example) => (
           <li>
             <h3>
@@ -375,7 +368,7 @@ const App = () => (
         )}
       </For>
     </ol>
-    <For each={EXAMPLES}>
+    <For each={EXAMPLES[index()]}>
       {(example) => (
         <>
           <Section title={example.title} slug={example.slug}>
