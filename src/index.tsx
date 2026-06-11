@@ -1,5 +1,5 @@
 import { Dynamic, render } from "solid-js/web";
-import { type VoidComponent, For, type ParentComponent, createSignal, batch } from "solid-js";
+import { type VoidComponent, onMount, For, type ParentComponent, createSignal, batch } from "solid-js";
 
 //import { PanelGroup, PanelGroupAPI, Panel, ResizeHandle } from "solid-resizable-panels";
 
@@ -8,9 +8,7 @@ import { PanelGroup, type PanelGroupAPI, Panel, ResizeHandle } from "./lib";
 import "./lib/styles.css";
 import "./styles.css";
 
-//const DEBUG = import.meta.env.DEV;
-//const DEBUG = false;
-//const DEBUG = true;
+
 
 const CodeExample: VoidComponent<{ ExampleComponent: VoidComponent; code: string }> = (props) => (
   <>
