@@ -9,7 +9,8 @@ import "./lib/styles.css";
 import "./styles.css";
 
 //const DEBUG = import.meta.env.DEV;
-const DEBUG = false;
+//const DEBUG = false;
+const DEBUG = true;
 
 const CodeExample: VoidComponent<{ ExampleComponent: VoidComponent; code: string }> = (props) => (
   <>
@@ -32,6 +33,9 @@ const Section: ParentComponent<{ title: string; slug: string }> = (props) => (
 
 const EXAMPLES: { ExampleComponent: VoidComponent; title: string; slug: string }[] = DEBUG
   ? [
+
+      //------------------------------------
+      /*
       {
         title: "DEBUG example",
         slug: "debug",
@@ -56,6 +60,55 @@ const EXAMPLES: { ExampleComponent: VoidComponent; title: string; slug: string }
           />
         ),
       },
+      */
+      //------------------------------------
+      {
+        title: "DEBUG example",
+        slug: "debug",
+        ExampleComponent: () => (
+          <CodeExample
+            ExampleComponent={() => (
+              <PanelGroup direction="column">
+                   <Panel id="1">
+                      <PanelGroup>
+                        <Panel id="11">Panel 11</Panel>
+                        <ResizeHandle />
+                        <Panel id="12">Panel 12</Panel>
+                      </PanelGroup>
+                   </Panel>
+                <ResizeHandle />
+                   <Panel id="2">
+                      <PanelGroup>
+                        <Panel id="21">Panel 21</Panel>
+                        <ResizeHandle />
+                        <Panel id="22">Panel 22</Panel>
+                      </PanelGroup>
+                   </Panel>
+              </PanelGroup>
+            )}
+            code={String.raw`
+              <PanelGroup direction="column">
+                   <Panel id="1">
+                      <PanelGroup>
+                        <Panel id="11">Panel 11</Panel>
+                        <ResizeHandle />
+                        <Panel id="12">Panel 12</Panel>
+                      </PanelGroup>
+                   </Panel>
+                <ResizeHandle />
+                   <Panel id="2">
+                      <PanelGroup>
+                        <Panel id="21">Panel 21</Panel>
+                        <ResizeHandle />
+                        <Panel id="22">Panel 22</Panel>
+                      </PanelGroup>
+                   </Panel>
+              </PanelGroup>
+`}
+          />
+        ),
+      },
+      //------------------------------------
     ]
   : [
       {
