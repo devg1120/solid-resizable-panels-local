@@ -30,7 +30,13 @@ const Section: ParentComponent<{ title: string; slug: string }> = (props) => (
 );
 
 
+const v_resize = (id, size) => {
+      console.log("..  v_resize", id,size);
+}
 
+const h_resize = (id, size) => {
+      console.log("   ..  h_resize", id,size);
+}
 //const EXAMPLES: { ExampleComponent: VoidComponent; title: string; slug: string }[] = DEBUG()
 const EXAMPLES: { ExampleComponent: VoidComponent; title: string; slug: string }[] = 
 [
@@ -42,19 +48,27 @@ const EXAMPLES: { ExampleComponent: VoidComponent; title: string; slug: string }
           <CodeExample
             ExampleComponent={() => (
               <PanelGroup direction="column">
-                   <Panel id="1">
+                   <Panel id="1" onResize={(size) => v_resize("1", size)}>
                       <PanelGroup>
-                        <Panel id="11">Panel 11</Panel>
+                        <Panel id="11" onResize={(size) => h_resize("11", size)}>
+			    Panel 11
+			</Panel>
                         <ResizeHandle />
-                        <Panel id="12">Panel 12</Panel>
+                        <Panel id="12" onResize={(size) => h_resize("12", size)}>
+			    Panel 12
+			</Panel>
                       </PanelGroup>
                    </Panel>
                 <ResizeHandle />
-                   <Panel id="2">
+                   <Panel id="2" onResize={(size) => v_resize("2", size)}>
                       <PanelGroup>
-                        <Panel id="21">Panel 21</Panel>
+                        <Panel id="21" onResize={(size) => h_resize("21", size)}>
+			    Panel 21
+			</Panel>
                         <ResizeHandle />
-                        <Panel id="22">Panel 22</Panel>
+                        <Panel id="22" onResize={(size) => h_resize("22", size)}>
+			    Panel 22
+			</Panel>
                       </PanelGroup>
                    </Panel>
               </PanelGroup>
