@@ -1,5 +1,7 @@
 .ResizeablePanelGroup {
   display: flex;
+  width:  100vw;  /*GUSA*/
+  height: 100vh;  /*GUSA*/
 }
 
 .ResizeablePanelGroup-ResizeHandle {
